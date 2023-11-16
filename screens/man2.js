@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -16,18 +15,18 @@ function man2({ navigation }) {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch("https://6554c4a463cafc694fe6ee28.mockapi.io/notes")
+        fetch("https://6554c4a463cafc694fe6ee28.mockapi.io/ghichu")
           .then((response) => response.json())
           .then((json) => setData(json))
           .catch((error) => console.error(error));
     }, []);
     //them
-    const [note, setNote]=useState("");
+    const [noidungghichu, setNoidungghichu]=useState("");
     const addNote = (note) => {
-      fetch("https://6554c4a463cafc694fe6ee28.mockapi.io/notes", {
+      fetch("https://6554c4a463cafc694fe6ee28.mockapi.io/ghichu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ note }),
+        body: JSON.stringify({ noidungghichu}),
       })
         .then((response) => response.json())
         .then((json) => console.log(json))
@@ -35,7 +34,7 @@ function man2({ navigation }) {
     };
     //xoa
     const DeleteNote = async (id) => {
-        await fetch(`https://6554c4a463cafc694fe6ee28.mockapi.io/notes/${id}`, {
+        await fetch(`https://6554c4a463cafc694fe6ee28.mockapi.io/ghichu/${id}`, {
           method: "DELETE",
         })
           .then(() => {
@@ -70,7 +69,7 @@ function man2({ navigation }) {
             source={require('../assets/img/Vector.png')}
             style={{height:'20px', width:'20px', resizeMode:'contain', left: '5px'}}
         />
-        <TextInput style={{height: '30px', width: '300px', borderRadius: '10px', borderWidth: '1px'}} onChangeText={setNote}></TextInput>
+        <TextInput style={{height: '30px', width: '280px', borderRadius: '10px', borderWidth: '1px'}} onChangeText={setNoidungghichu}></TextInput>
       </View>
       <View style={{top:'80px'}}>
         <FlatList
@@ -79,7 +78,7 @@ function man2({ navigation }) {
                 return(
                     <View style={{height: '50px', width:'300px', borderRadius:'40px', backgroundColor: 'gray', justifyContent: 'center', alignItems: 'center', left: '30px', marginBottom: '10px'}}>
                         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                            {/* <TouchableOpacity 
+                            <TouchableOpacity 
                                 onPress={()=>{DeleteNote(item.id)}}
                                 style={{width:'50px'}}
                             >
@@ -87,8 +86,8 @@ function man2({ navigation }) {
                                     source={require('../assets/img/Vector.png')}
                                     style={{height:'20px', width:'20px', resizeMode:'contain', left: '5px'}}
                                 />  
-                            </TouchableOpacity> */}
-                            <Text style={{width:'200px'}}>{item.note}</Text>
+                            </TouchableOpacity>
+                            <Text style={{width:'200px'}}>{item.noidungghichu}</Text>
                             {/* <View style={{width:'50px'}}>
                                 <Image
                                     source={require('../assets/img/Vector.png')}
@@ -104,9 +103,9 @@ function man2({ navigation }) {
 
       <View style={{top:'140px', alignItems: 'center'}}>
         <View style={{height: '50px', width: '50px', backgroundColor:'rgba(0, 189, 214, 1)', borderRadius: '60px', justifyContent: 'center', alignItems: 'center'}}>
-            {/* <TouchableOpacity onPress={()=>addNote(note)}>
+            <TouchableOpacity onPress={()=>addNote(noidungghichu)}>
                 <Text style={{fontSize: '30px', color: 'white'}}>+</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
         </View>
       </View>
     </View>
